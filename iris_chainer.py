@@ -1,10 +1,11 @@
-import chainer
+import numpy as np
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
+import chainer
 import chainer.links as L
 import chainer.functions as F
 from chainer import Sequential
-import numpy as np
+import matplotlib.pyplot as plt
 
 x, t = load_iris(return_X_y=True)
 
@@ -87,3 +88,17 @@ for epoch in range(n_epoch):
     results_train['accuracy'] .append(accuracy_train)
     results_valid['loss'].append(loss_val.array)
     results_valid['accuracy'].append(accuracy_val.array)
+
+
+
+loss_plot = plt.plot(results_train['loss'], label='train')
+loss_plot = plt.plot(results_valid['loss'], label='valid')
+plt.legend(loss_plot) 
+plt.show(loss_plot)
+
+accuracy_plot = plt.plot(results_train['accuracy'], label='train')
+accuracy_plot = plt.plot(results_valid['accuracy'], label='valid')
+plt.legend(accuracy_plot)
+plt.show(accuracy_plot)
+
+# 暇があったら複数表示するようにする
